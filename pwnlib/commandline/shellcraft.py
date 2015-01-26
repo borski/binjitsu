@@ -187,7 +187,7 @@ def main():
     code = pwnlib.asm.asm(code, arch = arch, os = os)
 
     if args.format in ['s', 'str', 'string']:
-        code = repr(code) + '\n'
+        code = '"' + repr(code)[1:-1].replace('"', '\\"')  + '"\n'
     elif args.format == 'c':
         code = '{' + ', '.join(map(hex, bytearray(code))) + '}' + '\n'
     elif args.format in ['h', 'hex']:
